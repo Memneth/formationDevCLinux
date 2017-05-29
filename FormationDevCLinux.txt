@@ -1,0 +1,115 @@
+Tp compilation n1
+------------------------------------------------------------------------
+créer un répertoire de travail (RGO) et le fichier 00-hello-ansi.c
+
+inclure les fichiers headers
+
+fonction clrscr()
+effacer l'écran
+
+gotoxy (colonne,ligne)
+positionnner le curseur sur l'écran
+
+fonction main
+effacer écran
+placer le curseur sur la colonne 5 et la ligne 10
+avec la fonction printf afficher le message HelloWorld
+insertion du code de retour EXIT_SUCCESS
+
+compiler le fichier 00-hello-ansi.c
+
+gcc -E 00-hello-ansi.c > 00-hello-ansi.i
+
+gcc -S 00-hello-ansi.i
+
+gcc -c 00-hello-ansi.s
+
+gcc -o hello 00-hello-ansi.o
+
+
+file hello -> description des caractèristiques du fichier
+
+
+rm 00-hello-ansi.[iso]  -> suppression des fichiers .i .o et .s
+
+gcc -o hello 00-hello-ansi.c
+
+
+
+
+TP n°2
+------------------------------------------------------------------------
+faire un fichier fic02 contenant les methodes
+clear screen
+position du curseur
+affichage hello world
+
+faire une librairie
+hello.h (interface )
+
+le fichier ficmain appelle la methode
+clear, position et affichage
+
+gcc -o hello 01-ficmain.c 01-fic02.c
+
+
+
+
+TP n°3  bibliothèque statique
+------------------------------------------------------------------------
+extension  .a
+
+
+création d'une lib
+
+gcc -c fic01.c fic02.c
+
+mkdir libs
+
+ar cr libs/libfic.a fic01.o fic02.o
+
+afficher le contenu d'une lib
+ar t libfic.a
+nm -s libfic.a
+nm -s --defined-only libs/libfic.a
+
+
+remplacer une librairie
+ar r libs/libfic.a fic03.o
+
+ajouter
+ar a libs/libfic.a fic03.o
+
+détruire
+ar d libs/libfic.a fic03.o
+
+compiler
+gcc -o ficmain ficmain.c ./libs/libfic.a
+
+
+tp n° 4 - Bibliothèque dynamique
+------------------------------------------------------------------------
+fichier en .so
+shared object
+
+l'editeur de liens dynamiques localise le biblio partagée et la charge en memoire
+
+
+compiler avec les options suivantes
+-fPIC   code relogeable (position independent code)
+-shared pour créer lors de la compilation la biblio partagée
+-Wl enregistre l'entête de la biblio et la transmet la valeur -soname
+
+mkdir /lib
+gcc -fPIC -shared -Wl, -soname,libfic.so.1 -o lib/libfic.so.1.0 fic01.c fic02.c
+// faire un lien symbolique
+ln -sf  libfic.so.1 libfic.so
+
+dans /etc/ld.so.conf.d
+créer un fichier pmylibs.conf
+ajouter le chemin du répertoire ou se trouve la biblio
+
+actualiser le cache avec ldconfig
+ldconfig
+ldconfig -v | grep libfic
+
