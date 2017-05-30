@@ -1,5 +1,5 @@
 /*
- * ficmain.c
+ * 01a_perfils.c
  *
  * Copyright 2017 bob <bob@dev>
  *
@@ -23,14 +23,27 @@
 
 
 #include <stdio.h>
-#include <stdlib.h>
-
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 int main(void)
 {
+    // création d'un fork
+    pid_t fils;
+    fils = fork();
 
-    clrscr();
-    gotoxy(15,10);
-    printf("%s\n","processus de compilation");
-    return (EXIT_SUCCESS);
+    int status;
+
+    if (fils==0)
+    {
+       printf("je suis le fils, mon pid est %d , le pid de mon père est %d\n",getpid(),getppid());
+    }
+    else
+    {
+       printf("je suis le pere, mon pid est %d , le pid de mon fils est %d\n",getpid(),fils);
+    }
+    //période d'attente
+     wait(&status);
+    return 0;
 }
 

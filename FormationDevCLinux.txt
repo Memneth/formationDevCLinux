@@ -101,15 +101,52 @@ compiler avec les options suivantes
 -Wl enregistre l'entête de la biblio et la transmet la valeur -soname
 
 mkdir /lib
-gcc -fPIC -shared -Wl, -soname,libfic.so.1 -o lib/libfic.so.1.0 fic01.c fic02.c
-// faire un lien symbolique
+gcc -fPIC -shared -Wl,-soname,libfic.so.1 -o libs/libfic.so.1.0 fic01.c fic02.c
+Attention: pas d'espace dans cette zone "-Wl,-soname,libfic.so.1"
+
+// faire un lien symbolique dans le répertoire libs
 ln -sf  libfic.so.1 libfic.so
 
 dans /etc/ld.so.conf.d
 créer un fichier pmylibs.conf
-ajouter le chemin du répertoire ou se trouve la biblio
+ajouter le chemin du répertoire où se trouve la biblio
 
 actualiser le cache avec ldconfig
 ldconfig
 ldconfig -v | grep libfic
 
+
+
+tp n° 5 - gestion des processus - 03-processus
+------------------------------------------------------------------------
+créer le fichier 01a_perfils.c
+déterminer les fichiers headers
+
+fonction main sans passage d'argument et avec passage de code retour
+
+appel de la fonction fork
+si le retour de la fonction fork = 0
+afficher je suis le fils mon pid est x et mon ppid est y
+sinon
+afficher je suis le pere mon pid est x le pid de mon fils est y
+finsi
+
+valeur du code de retour =0
+fin fonction main
+
+tp n°6 - primitives de recouvrement 01b_perfils.c
+------------------------------------------------------------------------
+
+fonction main sans passage d'arguments et sans code retour
+
+appel de la donction fork
+si retour de la fonction fork =-1 alors
+erreur de création de processus
+sinon
+si retour de la fonction fork()=0 alors
+je suis le fils mon pid est x mon ppid est y recouvrement par le processus ls -l
+sinon
+je suis le pere mon pid est x le pid de mon fils est y
+wait
+finsi
+fin de main
