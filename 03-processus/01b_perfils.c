@@ -37,11 +37,13 @@ void main()
     if(fils==-1)
     {
         printf("erreur de création de processus");
+        //une variable errno permet de definir plus précisement le type d'erreur
     }
     else if (fils==0)
     {
        printf("je suis le fils, mon pid est %d , le pid de mon père est %d\n",getpid(),getppid());
        printf("recouvrement par le processus\n");
+
        execlp("ls","ls","-l","/",NULL);
     }
     else

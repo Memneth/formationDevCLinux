@@ -1,3 +1,9 @@
+
+reférence url https://www.rocq.inria.fr/secret/Anne.Canteaut/COURS_C/cours.pdf
+
+
+
+
 Tp compilation n1
 ------------------------------------------------------------------------
 créer un répertoire de travail (RGO) et le fichier 00-hello-ansi.c
@@ -150,3 +156,68 @@ je suis le pere mon pid est x le pid de mon fils est y
 wait
 finsi
 fin de main
+
+
+tp n° 6 - primitives de recouvrement
+-------------------------------------------------------------------------
+fonction main sans passage d'argument et avec un code retour
+
+déclaration de variable
+message donnez la valeur de i et saisir l'entier i
+message donnez la valeur de j et saisie l'entier j
+
+appel de la fonction fork()
+
+si le retour de la fonction fork()=0 alors
+convertir i en chaine de caractère de 11 éléments dans la variable conv1
+convertir j en chaine de caractère de 11 éléments dans la variable conv2
+
+recouvrement par le processus 03b_calculer avec les arguments conv1, conv2
+sinon attendre le fils
+finsi
+fin fonction main
+
+
+
+03b_calculer
+fonction main avec passage d'arguments et sans code de retour
+si le nombre d'argument n'est pas correct alors
+afficher erreur
+sortir du programme
+finsi
+
+faire l'addition des deux arguments
+stocker le resultat dans la variable sum
+affiche la somme de x = sum
+fin fonction main
+
+scanf
+Sprintf
+atoi alphaToInteger
+execl recouvrement
+
+
+tp N°7 - thread
+-------------------------------------------------------------------------
+04a_threads.c
+
+définir les attributs par défaut
+définir la constante pthread_attr_default à null
+
+créer une methode f_thread
+    afficher le pid du thread et son identifiant
+fin méthode
+
+
+main
+créer un compteur i
+pour compteur de 0 à 3 exclus
+créer un thread
+afficher le pid et l'identidfiant du thread
+join le thread
+
+retour 0
+fin main
+
+
+
