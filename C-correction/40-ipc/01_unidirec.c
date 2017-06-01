@@ -17,7 +17,7 @@ int main(void) {
         // Fils écrit dans le tube
         // Pas lecture dans le tube
         close(p[0]);
-
+        // envoie dans le canal d'écriture
         write(p[1],"Bonjour",7);
         close(p[1]);
         exit(0);
@@ -26,10 +26,10 @@ int main(void) {
         // Père lit le tube
         // Pas écriture dans le tube
         close(p[1]);
-
+        //lecture du canal
         read(p[0],chaine,7);
         close(p[0]);
-        printf("%s\n", chaine);
+        printf("%s en lecture \n", chaine);
         wait(&status);
     }
     return(0);

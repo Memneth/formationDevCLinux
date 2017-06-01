@@ -1,7 +1,9 @@
 
 reférence url https://www.rocq.inria.fr/secret/Anne.Canteaut/COURS_C/cours.pdf
 
+http://perso.telecom-paristech.fr/~dupouy/pdf/BCI/2-ProcessusBCI-07.pdf
 
+http://www.lifl.fr/~marquet/ens/pdc/
 
 
 Tp compilation n1
@@ -218,6 +220,73 @@ join le thread
 
 retour 0
 fin main
+
+tp N°8 - processus zombie
+-------------------------------------------------------------------------
+06_zombie.c
+
+fonction main
+ sans arg et avec code retour
+ appel de la fonction fork()
+
+le père dort
+le fils sort immediatement
+
+
+ gcc -o zombie 06_zombie.c
+
+lancer l'exec en sous tache
+ ./zombie&
+
+ visualiser le zombie cde top
+ ps xaf
+
+killer le processus zombie
+ La seule manière d’éliminer ces processus zombies consiste
+ à causer la mort du processus parent, par exemple au moyen du signal SIGKILL
+ xkill
+
+tp N°9 - ordonnancement
+-------------------------------------------------------------------------
+07_ordo.c
+
+
+
+tp N°10 - gestion de fichier
+-------------------------------------------------------------------------
+01_manipfic.c
+
+fonction clrscr
+effacer l'écran
+fin fonction
+
+fonction main
+créer une structure eleve
+    nom de 10 caractères
+    note integer
+fin structure
+
+ouvrir un fichier note.dat mode read write et mode read user et write user
+
+si erreur dans la création
+afficher l'erreur
+finsi
+
+pour i =0 to 4
+ afficher nom de l'élève
+ récupérer la saisie
+ set  eleve.nom
+ afficher la note
+ récupérer la saisie
+ set eleve.note
+ ecrire l'élève dans le fichier
+fin pour
+
+positionner le curseur en début de fichier
+lire le fichier
+afficher le nom et la note
+
+fermer le fichier
 
 
 
